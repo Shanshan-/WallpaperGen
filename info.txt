@@ -1,0 +1,38 @@
+General idea
+Program to be capable of removing scrolling end/beginning credits from a series of time-lapse screenshots
+ -> Secondarily: give ml filling in algorithms a try for if single image/insufficient images
+
+General Outline
+1. Use OCR to identify all instances of text on the images
+    a) at minimum, should recognize roman alphabet, arabic numbers, common symbols
+    b) as expansion, teach to also recognize:
+        i. roman alphabet derivations: n~, tones, etc.
+        ii. asian languages: chinese, japanese, korean and hindu?
+        iii. other languages: hindu, arabic, cyrillic, and other alphabet systems
+    c) mark them to be filled in (list of pixels/zones, fill with unique pixel values, etc.)
+    d) maybe train and save an independent OCR algo (tensorflow/algo had ths capability, o/w utilize jupyter)
+        i. depends on the options available
+2. Fill in the blanks created by removing the identified text
+    a) pull pixel values from other images in time-lapse images
+        i. determine if panorama stitching is needed, or if image was panned
+        ii. if no, or just panning, then just do a 1:1 comparison
+        iii. if just panning, do a 1:1 with corresponding offset (probably can just do by layering post removal)
+        iv. else, panorama stitch (see if valid to just stitch images with text removed, or if more needed)
+    b) if no data available to pull from other images in series
+        i. allow for addition of new source images to a partially processed image
+        ii. use that ml graphics paper concepts to try to guesstimate the appropriate pixel values
+3. Format output as needed
+    a) eg. dimensions, img type, location, etc.
+
+Potential extensions / Related Projects
+- extend the OCR portion to be capable of extracting the text and outputting it
+- get the ml filling in algo to work for singular image
+    - research problems: fuzziness of filled in portions if target area is too large
+-
+
+Things I need
+- old CV projects and notes as ref
+- find copy of that graphics paper from when researching pixelization
+
+Things to keep in mind
+- worry about porting to Jupyter Notebook later (needs prof ver or online shenanigans o/w)
